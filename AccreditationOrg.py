@@ -25,7 +25,7 @@ csvFile = open("AccreditationOrg.csv", "x")
 csvWriter = csv.writer(csvFile)
 csvWriter.writerow(["Degree name", "Institution", "Location", "Link"])
 
-while index < getMaxPageIndex():
+while index <= getMaxPageIndex():
     print(f"Getting page {index}")
     url = f"https://accreditation.org/find-accredited-programs/university-search?page={index}"
     result = requests.get(url)
