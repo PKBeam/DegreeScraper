@@ -3,6 +3,7 @@ import json
 import time 
 import csv
 import os
+import re
 from bs4 import BeautifulSoup
 
 def getMaxPageIndex():
@@ -46,15 +47,15 @@ while index < getMaxPageIndex():
             degreeList = []
 
             degrees = str(degreesHtml)
-
             degrees = degrees.replace("<p>", "")
             degrees = degrees.replace("</p>", "")
             degrees = degrees.replace("</br>", "")
             degrees = degrees.replace("<br>", "")
             degrees = degrees.replace("<br/>", "")
-            degrees = degrees.replace("\n", "")
+            degrees = degrees.replace("&amp;", "&")
+            degrees = re.sub(r"\[.*\]", "", degrees)
 
-            for d in degrees.split(" [1]"):
+            for d in degrees.split("\n"):
                 if len(d) == 0:
                     continue
                 csvWriter.writerow([d, institutionName, countryName, url])
