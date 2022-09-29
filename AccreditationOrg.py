@@ -18,10 +18,10 @@ waitLength = 2 # seconds
 
 index = 0
 
-if os.path.exists("out.csv"):
-	os.remove("out.csv")
+if os.path.exists("AccreditationOrg.csv"):
+	os.remove("AccreditationOrg.csv")
 
-csvFile = open("out.csv", "x")
+csvFile = open("AccreditationOrg.csv", "x")
 csvWriter = csv.writer(csvFile)
 csvWriter.writerow(["Degree name", "Institution", "Location", "Link"])
 

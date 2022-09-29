@@ -28,10 +28,10 @@ index = 0
 
 url = f"https://search.prtl.co/2018-07-23/?q=en-1705|lv-bachelor|uc-202|tc-AUD&size={size}&start={index}"
 
-if os.path.exists("out.csv"):
-	os.remove("out.csv")
+if os.path.exists("BachelorsPortal.csv"):
+	os.remove("BachelorsPortal.csv")
 
-csvFile = open("out.csv", "x")
+csvFile = open("BachelorsPortal.csv", "x")
 csvWriter = csv.writer(csvFile)
 csvWriter.writerow(["Degree name", "Duration", "Institution", "Country", "Description", "Link"])
 
