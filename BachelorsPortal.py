@@ -1,6 +1,6 @@
 import requests
 import json
-import time 
+import time
 import csv
 import os
 
@@ -19,7 +19,7 @@ maxLimit = 10000
 
 # need to avoid spamming the API
 # make this bigger if you're getting rate limited
-waitLength = 2 # seconds
+waitLength = 5 # seconds
 
 # API-enforced maximum of 100
 size = 100
@@ -36,15 +36,15 @@ csvWriter = csv.writer(csvFile)
 csvWriter.writerow(["Degree name", "Duration", "Institution", "Country", "Description", "Link"])
 
 while index + size <= maxLimit:
-	time.sleep(waitLength)
-	result = requests.get(url)
-	for obj in result.json():
-		id = obj["id"]
-		title = obj["title"]
-		duration = obj["fulltime_duration"] if "fulltime_duration" in obj.keys() else None
-		durationString = str(duration["value"]) + " " + duration["unit"] + ("s" if duration["value"] > 1 else "") if duration else "N/A" 
-		csvWriter.writerow([ obj["title"], durationString, obj["organisation"], getCountries(obj["venues"]), obj["summary"], getDegreeLink(id)])
-	
-	index += size
+    print(f"Getting entries {index} to {index + size}")
+    time.sleep(waitLength)
+    result = requests.get(url)
+    for obj in result.json():
+        id = obj["id"]
+        title = obj["title"]
+        duration = obj["fulltime_duration"] if "fulltime_duration" in obj.keys() else None
+        durationString = str(duration["value"]) + " " + duration["unit"] + ("s" if duration["value"] > 1 else "") if duration else "N/A"
+        csvWriter.writerow([ obj["title"], durationString, obj["organisation"], getCountries(obj["venues"]), obj["summary"], getDegreeLink(id)])
+    index += size
 
 csvFile.close()
